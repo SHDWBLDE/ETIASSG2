@@ -1,0 +1,36 @@
+# GraphQL schema example
+#
+# https://gqlgen.com/getting-started/
+
+type Query {
+  # modules returns all the saved modules in the system
+  modules: [Module!]!
+  module(id: String!): Module
+  searchModules(text: String!): [Module]
+}
+
+type Mutation {
+  # createModule creates a new module and saves it to the system
+  createModule(input: NewModule!): ID!
+  updateModule(id: ID!, input: NewModule!): Module!
+  deleteModule(id: ID!): String!
+}
+
+# Module is specified by the institution and students enrol for its class
+type Module {
+  id: ID!
+  name: String!
+  synopsis: String!
+}
+
+# LearningObjective are for the modules
+type LearningObjective {
+  id: ID!
+  module: Module!
+  name: String!
+}
+
+input NewModule {
+  name: String!
+  synopsis: String!
+}
